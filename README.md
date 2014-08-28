@@ -6,7 +6,7 @@ A series of snippets for Varnish Cache divided by major version.
 How to use
 ----------
 
-Download the required functionality and include it in the configuration using:
+Download the file with the required functionality and include it in the configuration using:
 
 ```
 include "<path/to/file>";
