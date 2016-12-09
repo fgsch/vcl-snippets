@@ -11,8 +11,7 @@ sub try_stale_if_error {
 }
 
 sub vcl_backend_fetch {
-	if (bereq.http.sie-abandon || (bereq.retries > 0 &&
-	    bereq.http.sie-enabled)) {
+	if (bereq.http.sie-abandon) {
 		return (abandon);
 	}
 }
@@ -25,7 +24,7 @@ sub vcl_backend_response {
 
 sub vcl_backend_error {
 	if (bereq.http.sie-enabled) {
-		return (retry);
+		return (abandon);
 	}
 }
 
@@ -34,4 +33,8 @@ sub vcl_synth {
 		unset req.http.sie-enabled;
 		return (restart);
 	}
+}
+
+sub vcl_hit {
+	call try_stale_if_error;
 }
