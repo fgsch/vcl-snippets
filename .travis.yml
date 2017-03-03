@@ -11,4 +11,4 @@ before_install:
   - sudo apt-get update
   - sudo apt-get install varnish
 script:
-  - run.sh $VER
+  - sh run.sh $VER
