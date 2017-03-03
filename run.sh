@@ -9,5 +9,13 @@ vcl 4.0;
 backend default { .host = "127.0.0.1"; }
 include "$(pwd)/$f";
 _EOF
-	varnishd -n $(pwd) -C -f $t || exit 2
+	echo -n "$f "
+	varnishd -n $(pwd) -C -f $t 2>/dev/null
+	if [ $? -eq 0 ]; then
+		echo "passed"
+	else
+		echo "FAILED"
+		status=$?
+	fi
 done
+exit $status
