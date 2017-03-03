@@ -1,6 +1,8 @@
 vcl-snippets
 ============
 
+[![Build Status](https://travis-ci.org/fgsch/vcl-snippets.svg?branch=master)](https://travis-ci.org/fgsch/vcl-snippets)
+
 A series of snippets for Varnish Cache divided by major version.
 
 How to use
