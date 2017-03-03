@@ -12,11 +12,11 @@ before_install:
   - sudo apt-get install varnish
 script:
   - for f in $(echo v${VER%%.?}/*.vcl); do
-      t=$(mktemp)
+      t=$(mktemp);
       cat >$t <<_EOF
-vcl 4.0;
-backend default { .host = "1.2.3.4"; }
-include "$(pwd)/$f";
-_EOF
-      varnishd -C -f $t;
+        vcl 4.0;
+        backend default { .host = "1.2.3.4"; }
+        include "$(pwd)/$f";
+      _EOF;
+      varnishd -C -f $t
     done
