@@ -1,5 +1,6 @@
 dist: trusty
 sudo: required
+language: generic
 env:
   - VER=4.1
   - VER=5.0
