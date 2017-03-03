@@ -1,0 +1,22 @@
+dist: trusty
+sudo: required
+env:
+  - VER=4.1
+  - VER=5.0
+before_install:
+  - sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 82B186B4
+  - echo
+    "deb http://ppa.launchpad.net/fgsch/varnish-$VER/ubuntu trusty main" |
+    sudo tee /etc/apt/sources.list.d/varnish-cache.list
+  - sudo apt-get update
+  - sudo apt-get install varnish
+script:
+  - for f in $(echo v${VER%%.?}/*.vcl); do
+      t=$(mktemp)
+      cat >$t <<_EOF
+vcl 4.0;
+backend default { .host = "1.2.3.4"; }
+include "$(pwd)/$f";
+_EOF
+      varnishd -C -f $t;
+    done
