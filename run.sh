@@ -2,8 +2,9 @@
 #
 # Run every snippet through varnishd
 
+t=$(mktemp)
+trap 'rm -f $t' 0
 for f in $(echo v${1%%.?}/*.vcl); do
-	t=$(mktemp)
 	cat >$t <<_EOF
 vcl 4.0;
 backend default { .host = "127.0.0.1"; }
