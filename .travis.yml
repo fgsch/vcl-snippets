@@ -4,12 +4,9 @@ language: generic
 env:
   - VER=4.1
   - VER=5.0
+  - VER=5.1
 before_install:
-  - sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 82B186B4
-  - echo
-    "deb http://ppa.launchpad.net/fgsch/varnish-$VER/ubuntu trusty main" |
-    sudo tee /etc/apt/sources.list.d/varnish-cache.list
-  - sudo apt-get update
-  - sudo apt-get install varnish
+  - curl -s https://packagecloud.io/install/repositories/varnishcache/varnish${VER/./}/script.deb.sh | sudo bash
+  - sudo apt-get install varnish=${VER}.*
 script:
   - ./runtests.sh $VER
