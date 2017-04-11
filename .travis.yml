@@ -12,4 +12,4 @@ before_install:
   - sudo apt-get update
   - sudo apt-get install varnish
 script:
-  - sh run.sh $VER
+  - ./runtests.sh $VER
